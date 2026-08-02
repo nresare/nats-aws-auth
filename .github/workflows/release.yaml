@@ -163,7 +163,7 @@ jobs:
 
       # Helm Chart Release
       - name: Install Cosign
-        uses: sigstore/cosign-installer@v3.7.0
+        uses: sigstore/cosign-installer@v3.10.1
 
       - name: Install crane
         uses: imjasonh/setup-crane@v0.4
@@ -432,7 +432,7 @@ jobs:
     needs: release
     steps:
       - name: Install Cosign
-        uses: sigstore/cosign-installer@v3.7.0
+        uses: sigstore/cosign-installer@v3.10.1
 
       - name: Setup Helm
         uses: mamezou-tech/setup-helmfile@v2.1.0
