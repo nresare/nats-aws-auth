@@ -435,7 +435,7 @@ jobs:
         uses: sigstore/cosign-installer@v3.7.0
 
       - name: Setup Helm
-        uses: mamezou-tech/setup-helmfile@v2.1.0
+        uses: mamezou-tech/setup-helmfile@v2.2.0
         with:
           install-helm-plugins: no
           install-kubectl: no
