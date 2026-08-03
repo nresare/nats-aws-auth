@@ -155,7 +155,7 @@ jobs:
           output-file: sbom.spdx.json
 
       - name: Attest image
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.build.outputs.digest }}
@@ -264,7 +264,7 @@ jobs:
           echo "Pushed chart digest: ${CHART_DIGEST}"
 
       - name: Attest OCI Helm chart
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@v4
         with:
           subject-name: ${{ env.REGISTRY }}/${{ github.repository_owner }}/charts/nats-aws-auth
           subject-digest: ${{ steps.push_chart.outputs.digest }}
