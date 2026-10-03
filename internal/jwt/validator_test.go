@@ -4,6 +4,7 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 	"time"
 )
@@ -110,6 +111,10 @@ func TestValidateToken_ExpiredToken(t *testing.T) {
 	if !IsExpiredError(err) {
 		t.Errorf("expected expired error, got %v", err)
 	}
+	if !strings.Contains(err.Error(), "expired_at 2025-11-25T07:37:58Z") ||
+		!strings.Contains(err.Error(), "current_time 2026-01-01T00:00:00Z") {
+		t.Errorf("expected expiry diagnostics, got %v", err)
+	}
 }
 
 func TestValidateToken_InvalidSignature(t *testing.T) {
@@ -191,6 +196,9 @@ func TestValidateToken_WrongAudience(t *testing.T) {
 
 	if !IsClaimsError(err) {
 		t.Errorf("expected claims validation error, got %v", err)
+	}
+	if !strings.Contains(err.Error(), `expected "wrong-audience", got ["sts.amazonaws.com"]`) {
+		t.Errorf("expected audience diagnostics, got %v", err)
 	}
 }
 
