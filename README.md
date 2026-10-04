@@ -90,6 +90,20 @@ For local development, the same workflow can use directory-backed keys without A
   --app-account-key-alias=nats-app-account
 ```
 
+## Container images
+
+Set `IMAGE_REPOSITORY` to choose the image namespace and optional registry for
+`make docker-build` and `make docker-push`. The default is `nats-aws-auth`.
+
+```bash
+make docker-push IMAGE_REPOSITORY=nresare/nats-aws-auth
+# A different registry, with an explicit version tag:
+make docker-push IMAGE_REPOSITORY=ghcr.io/nresare/nats-aws-auth VERSION=dev
+```
+
+Both targets tag the image with `VERSION` and `latest`. Authenticate to the
+destination registry using `docker login` before pushing.
+
 ## CLI flags
 
 ### Common

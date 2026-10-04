@@ -1,5 +1,7 @@
 # Variables
 BINARY_NAME := nats-aws-auth
+# Image repository, including an optional registry host and namespace.
+IMAGE_REPOSITORY ?= $(BINARY_NAME)
 OUT_DIR := out
 VERSION ?= $(shell git describe --tags --always --dirty 2>/dev/null || echo "dev")
 COMMIT ?= $(shell git rev-parse --short HEAD 2>/dev/null || echo "unknown")
@@ -80,8 +82,8 @@ docker-build: build-all ## Build Docker image locally
 	@echo "Building Docker image for linux/amd64..."
 	docker buildx build \
 		--platform linux/amd64 \
-		-t $(BINARY_NAME):$(VERSION) \
-		-t $(BINARY_NAME):latest \
+		-t $(IMAGE_REPOSITORY):$(VERSION) \
+		-t $(IMAGE_REPOSITORY):latest \
 		--load \
 		.
 
@@ -90,8 +92,8 @@ docker-push: build-all ## Build and push Docker image
 	@echo "Building and pushing multi-arch Docker image..."
 	docker buildx build \
 		--platform linux/amd64,linux/arm64 \
-		-t $(BINARY_NAME):$(VERSION) \
-		-t $(BINARY_NAME):latest \
+		-t $(IMAGE_REPOSITORY):$(VERSION) \
+		-t $(IMAGE_REPOSITORY):latest \
 		--push \
 		.
 
