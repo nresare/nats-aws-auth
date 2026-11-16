@@ -27,7 +27,7 @@ jobs:
           cache: true
 
       - name: Setup Helm
-        uses: mamezou-tech/setup-helmfile@v2.2.0
+        uses: mamezou-tech/setup-helmfile@v2.4.0
         with:
           helm-version: ${{ env.HELM_VERSION }}
           install-helm-plugins: no
